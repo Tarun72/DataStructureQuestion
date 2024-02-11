@@ -161,4 +161,72 @@ public class BinaryTreeUse {
         count =  count + countNodes(root.right);
         return count;
     }
+
+    public static LinkedListNode<Integer> constructLinkedList2(BinaryTreeNode<Integer> root) {
+        if(root == null){
+            return  null;
+        }
+
+        Queue<BinaryTreeNode<Integer>> pendingNotes = new LinkedList<>();
+        pendingNotes.add(root);
+        LinkedListNode<Integer>  headNode =  new LinkedListNode<>(root.data);
+        LinkedListNode<Integer>  currentNode = headNode;
+        while (!pendingNotes.isEmpty()){
+            BinaryTreeNode<Integer> node  = pendingNotes.poll();
+            BinaryTreeNode<Integer> nodeLeft = node.left;
+            BinaryTreeNode<Integer> nodeRight = node.right;
+            if(nodeLeft != null){
+                pendingNotes.add(nodeLeft);
+                LinkedListNode<Integer> nextNode = new LinkedListNode<>(nodeLeft.data);
+                currentNode.next =  nextNode;
+                currentNode = currentNode.next;
+            }
+            if(nodeRight != null){
+                pendingNotes.add(nodeRight);
+                LinkedListNode<Integer> nextNode = new LinkedListNode<>(nodeRight.data);
+                currentNode.next =  nextNode;
+                currentNode = currentNode.next;
+            }
+
+        }
+
+        return headNode;
+    }
+
+
+//    public static LinkedListNode<Integer> constructLinkedList(BinaryTreeNode<Integer> root) {
+//        if(root == null){
+//            return  null;
+//        }
+//        return new BinaryTreeNode<Integer>(2);
+//    }
+
+//    static LinkedListNode<Integer> helperFunction(BinaryTreeNode<Integer> root){
+//        if(root == null){
+//            return  null;
+//        }
+//        helperFunction(root.left);
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
